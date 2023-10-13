@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    background-color: aqua;
+h1 {
+    text-align: center;
+    color: #FBD85D;
+    font-size: 128px;
+    font-family: 'Pixelify Sans', sans-serif;
+    margin: 0 auto;
+    margin-bottom: 20px;
 }
