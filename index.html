@@ -13,15 +13,87 @@
             rel="stylesheet">
     </head>
     <body>
-        <div class="md:container md:mx-auto h-screen bg-emerald-700 text-white p-4">
-            <h1>Yahtzee!</h1>
-            <div class="scorecard-container-lg
-             bg-zinc-100 
-             border-2 p-4
-             mt-10">
+        <div class="md:container md:mx-auto h-screen bg-emerald-700 text-white p-4
+            flex flex-col justify-center items-center">
+            <h1 class="w-full text-9xl">Yahtzee!</h1>
+            
+            <div class="scorecard-container-lg bg-zinc-100 border-2 p-4
+             mt-5 flex text-black text-2xl">
+                <!-- <div class=" mb-4 mr-5">
+                    <h1 class="w-full text-2xl font-bold text-black">Scorecard</h1>
+                </div> -->
+                    
+                <div class="flex-1 grid grid-cols-1 gap-4 mr-2">
+                    <div class="flex justify-between items-center font-bold">Ones
+                        <div>0</div>
+                    </div>
+                    <div class="flex justify-between items-center font-bold">Twos
+                        <div>0</div>
+                    </div>
+                    <div class="flex justify-between items-center font-bold">Threes
+                        <div>0</div>
+                    </div>
+                    <div class="flex justify-between items-center font-bold">Fours
+                        <div>0</div>
+                    </div>
+                    <div class="flex justify-between items-center font-bold">Fives
+                        <div>0</div>
+                    </div>
+                    <div class="flex justify-between items-center font-bold">Sixes
+                        <div>0</div>
+                    </div>
+                    <div class="font-bold">Bonus <br>
+                        <small>35 points for score of 63 or more</small>
+                        <!-- <div>0</div> -->
+                    </div>
+                </div>
+
+                <div class="flex-1 grid grid-cols-1 gap-4 ml-2">
+                    <div class="flex justify-between items-center font-bold">3 of a Kind
+                        <div>0</div>
+                    </div>
+                    <div class="flex justify-between items-center font-bold">4 of a Kind
+                        <div>0</div>
+                    </div>
+                    <div class="flex justify-between items-center font-bold">Full House
+                        <div>0</div>
+                    </div>
+                    <div class="flex justify-between items-center font-bold">Sm Straight
+                        <div>0</div>
+                    </div>
+                    <div class="flex justify-between items-center font-bold">Lg Straight
+                        <div>0</div>
+                    </div>
+                    <div class="flex justify-between items-center font-bold">Chance
+                        <div>0</div>
+                    </div>
+                    <div class="flex justify-between items-center font-bold">Yahtzee
+                        <div>0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-9 mt-4 mb-1 text-2xl">
+                <span class="font-bold mr-5">Total Score:</span>
+                <span id="totalScore">0</span>
+            </div>
+
+            <div class="container flex justify-center h-full max-w-xs space-x-14 items-center">
+                <label for="dice">Hold</label>
+                <img class="dice w-20 h-20" src="./images/dice_1.png" alt="dice1">
+                <img class="dice w-20 h-20" src="./images/dice_1.png" alt="dice2">
+                <img class="dice w-20 h-20" src="./images/dice_1.png" alt="dice3">
+                <img class="dice w-20 h-20" src="./images/dice_1.png" alt="dice4">
+                <img class="dice w-20 h-20" src="./images/dice_1.png" alt="dice5">
+            </div>
+            <div class="container flex justify-center h-full max-w-xl 
+                text-yellow-300 text-lg space-x-4 items-center">
+                <button class="rollDice border-solid border-red-600 hover:bg-slate-100 border-2 w-52 h-16 mr-15  bg-red-600 rounded-2xl">Roll Dice</button>
+                <button class="border-solid border-red-600 hover:bg-slate-100 border-2 w-52 h-16 mr-20  bg-red-600 rounded-2xl">Next Round</button>
+                <button class="border-solid border-red-600 hover:bg-slate-100 border-2 w-52 h-16 mr-20  bg-red-600 rounded-2xl">New Game</button>
+                <button class="border-solid border-red-600 hover:bg-slate-100 border-2 w-52 h-16 mr-20  bg-red-600 rounded-2xl">Rules</button>
             </div>
         </div>
 
-        <script src="mainScript.js"></script>
+        <script src="dice.js"></script>
     </body>
 </html>

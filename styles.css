@@ -2,11 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
 h1 {
     text-align: center;
     color: #FBD85D;
-    font-size: 128px;
-    font-family: 'Pixelify Sans', sans-serif;
+    /* font-size: 128px; */
     margin: 0 auto;
     margin-bottom: 20px;
 }
