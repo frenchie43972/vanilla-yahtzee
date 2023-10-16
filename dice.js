@@ -17,3 +17,12 @@ document.querySelector('.rollDice').addEventListener('click', function() {
         });
     }, 1000);
 });
+
+let diceElements = document.querySelectorAll('.dice');
+
+diceElements.forEach(dice => {
+    dice.addEventListener('click', function() {
+        let span = dice.previousElementSibling;  
+        span.classList.toggle('hidden');    
+    });
+});
