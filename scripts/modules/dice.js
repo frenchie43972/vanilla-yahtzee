@@ -1,9 +1,23 @@
 //Sets rollCount to 0 rolls
 let rollCount = 0; 
 
-document.querySelector('#rollDice').addEventListener('click', function() {
+// Export function to house all dice behaviors
+export function setupDice() {
+    // Initilaize dice event listener
+    let diceElements = document.querySelectorAll('.dice');
+
+    diceElements.forEach(dice => {
+        dice.addEventListener('click', toggleDiceHold);
+    });
+
+    // Initiates the roll dice and next round buttons event listener
+    document.querySelector('#rollDice').addEventListener('click', rollAllDice);
+    document.querySelector('#nextRound').addEventListener('click', resetForNextRound);
+}
+
+function rollAllDice() {
     // Increments rollCount when clicked
-    rollCount++; 
+    rollCount++;
 
     // Disables the rollDice button so the roll count does not go past 3
     if (rollCount >= 3) {
@@ -26,10 +40,10 @@ document.querySelector('#rollDice').addEventListener('click', function() {
             // Generates a random number between 1-6 and matches the correct number with the
             // dice image. The shuffle occurs every 100 milliseconds
             let randomNum = (Math.floor(Math.random() * 6) + 1);
-            dice.src = `./images/dice_${randomNum}.png`
+            dice.src = `/assets/images/dice_${randomNum}.png`
             }, 100);  
         }
-    });    
+    });
 
     // This function sets the shuffel timeout to 1 second and whatever random number it is on
     // will be the dice that is face up for the round. It will only apply to non-held die
@@ -40,25 +54,21 @@ document.querySelector('#rollDice').addEventListener('click', function() {
             if (!isHeld) {
                 clearInterval(diceShuffle[index]);
                 let finalNum = Math.floor(Math.random() * 6) + 1;
-                dice.src = `./images/dice_${finalNum}.png`
+                dice.src = `/assets/images/dice_${finalNum}.png`
             }
         });
     }, 1000);
-});
+}
 
-let diceElements = document.querySelectorAll('.dice');
-
-// Event listener for toggling the hidden class for the dice elements
+// Function  for toggling the hidden class for the dice elements
 // Toggles the 'Hold" text for each die
-diceElements.forEach(dice => {
-    dice.addEventListener('click', function() {
-        let span = dice.previousElementSibling;  
-        span.classList.toggle('hidden');    
-    });
-});
+function toggleDiceHold() {
+    let span = this.previousElementSibling;  
+    span.classList.toggle('hidden');
+}
 
-// Event listener to clear the held dice and reset the roll button for the next round
-document.querySelector('#nextRound').addEventListener('click', () => {
+// Clear the held dice and reset the roll button for the next round
+function resetForNextRound() {
     let resetHold = document.querySelectorAll('.hold');
 
     rollCount = 0;
@@ -67,4 +77,4 @@ document.querySelector('#nextRound').addEventListener('click', () => {
     resetHold.forEach(span => {
         span.classList.add('hidden');
     });
-});
+}
