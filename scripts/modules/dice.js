@@ -63,6 +63,11 @@ function rollAllDice() {
 // Function  for toggling the hidden class for the dice elements
 // Toggles the 'Hold" text for each die
 function toggleDiceHold() {
+    // Prevents dice from being held before the rolling commences
+    if (rollCount === 0) {
+        return;
+    }
+
     let span = this.previousElementSibling;  
     span.classList.toggle('hidden');
 }
