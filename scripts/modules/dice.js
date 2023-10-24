@@ -40,12 +40,12 @@ function rollAllDice() {
             // Generates a random number between 1-6 and matches the correct number with the
             // dice image. The shuffle occurs every 100 milliseconds
             let randomNum = (Math.floor(Math.random() * 6) + 1);
-            dice.src = `/assets/images/dice_${randomNum}.png`
+            dice.src = `/assets/images/dice_${randomNum}.png`;
             }, 100);  
         }
     });
 
-    // This function sets the shuffel timeout to 1 second and whatever random number it is on
+    // This function sets the shuffel timeout to 1.25 seconds and whatever random number it is on
     // will be the dice that is face up for the round. It will only apply to non-held die
     setTimeout(() => {
         diceImage.forEach((dice, index) => {
@@ -54,10 +54,13 @@ function rollAllDice() {
             if (!isHeld) {
                 clearInterval(diceShuffle[index]);
                 let finalNum = Math.floor(Math.random() * 6) + 1;
-                dice.src = `/assets/images/dice_${finalNum}.png`
+                dice.src = `/assets/images/dice_${finalNum}.png`;
+                // Sets the attribute on the dice element to the value it landed on
+                // This is now stored in the DOM so it can queried elswhere in the program
+                dice.setAttribute('data-value', finalNum);
             }
         });
-    }, 1000);
+    }, 1250);
 }
 
 // Function  for toggling the hidden class for the dice elements
