@@ -73,5 +73,18 @@ if (sortStraightDice.slice(i, i + 4).every((val, idx, arr) => idx === 0 || val =
 loop the if statement uses .slice to extract four dice from the sorted array if true. The .every() method checks if the 
 next element in the array is exactly one greater than the previous element (val === arr[idx - 1] + 1). When tue, returns
 30 points else 0
-		*Small Straight*
+		*End Small Straight*
 
+		*Score Listener*
+scoreElements.forEach(el => { ... }) - This will iterate over each element (el) we will do something with
+
+el.addEventListener('click', function() { ... }) - The start of the event listener
+
+if (!this.classList.contains('score-set')) { - The statement inside the event listener uses 'this' referring to the
+element clicked. It will check if the element has the class 'score-set', if not the user can set the score.
+
+const scoreType = this.getAttribute('id').replace('-score', '') - This variable will get the is of a clicked element
+and removes the -score part (i.e., ones-score becomes one) and determines what score category the user selects
+
+calculateAndUpdateScore(scoreType, this) - Then we call the calcualte score function to update the text content with 
+the score

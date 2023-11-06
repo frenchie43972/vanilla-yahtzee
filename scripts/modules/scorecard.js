@@ -2,6 +2,8 @@ export function scorecard() {
     
 }
 
+document.addEventListener('DOMContentLoaded', scoreListeners);
+
 const scoreCalculators = {
     // Check *Top Section Scores* in the README for greater details
     // the dice arrow function represents an array of integers representing the number value
@@ -62,7 +64,7 @@ const scoreCalculators = {
         dice.forEach(val => (count[val] = count[val] || 0) + 1);
         for (const counts of Object.values(count)) {
             if (counts >= 3) {
-                return dice.reduce((a, b) + a + b, 0);
+                return dice.reduce((a, b) => a + b, 0);
             }
         }
         return 0;
@@ -73,7 +75,7 @@ const scoreCalculators = {
         dice.forEach(val => (count[val] = count[val] || 0) + 1);
         for (const counts of Object.values(count)) {
             if (counts >= 4) {
-                return dice.reduce((a, b) + a + b, 0);
+                return dice.reduce((a, b) => a + b, 0);
             }
         }
         return 0;
@@ -90,6 +92,21 @@ const scoreCalculators = {
         return allSameDice ? 50 : 0;
     },
 };
+
+// Detailed explanation can be found in the README under *Score Listener*
+// The function is set up to initialize event listeners for displaying scores
+function scoreListeners() {
+    const scoreElements = document.querySelectorAll('.score');
+
+    scoreElements.forEach(el => {
+        el.addEventListener('click', function() {
+            if (!this.classList.contains('score-set')) {
+                const scoreType = this.getAttribute('id').replace('-score', '');
+                calculateAndUpdateScore(scoreType, this);
+            }
+        });
+    });
+}
 
 function calculateAndUpdateScore(scoreId) {
     let diceValues = Array.from(document.querySelectorAll('.dice')).map(dice => parseInt(dice.getAttribute('data-value')));
