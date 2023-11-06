@@ -16,7 +16,9 @@ const scoreCalculators = {
         //   **END TOP SECTION**
 
     // Check *Full House* in the README for greater details
-    // 
+    // The functioniterates through the dice to check dice values for a full house
+    // condition. If the conditions are met, it will return a 25 point value; if not 
+    // it will return 0
     'fullHouse': dice => {
         const counts = {};
         dice.forEach(val => counts[val] = (counts[val] || 0) + 1);
@@ -26,6 +28,67 @@ const scoreCalculators = {
         }
         return 0;
     }, 
+
+    // Check *Small Straight* in the README file for greater details
+    // Sorts the dice and interates through the sorted dice checking for a sequence of four
+    // then checks for the sequence of dice. if the sequence is present, it will return 30 points
+    // and if not, returns 0 points
+    'smallStraight': dice => {
+        const sortStraightDice = Array.from(new Set(dice)).sort();
+        for (let i = 0; i < sortStraightDice.length - 3; i++) {
+            if (sortStraightDice.slice(i, 1 + 4).every((val, idx, arr) => idx === 0 || val === arr[idx - 1] + 1)) {
+                return 30;
+            }
+        }
+        return 0;
+    },
+
+    // The Large Straight is similar to the Small with the exception that it must have the values of all five
+    // dice nstead of four
+    'largeStraight': dice => {
+        const sortDice = Array.from(new Set(dice)).sort((a, b) => a - b);
+        if(sortDice.length === 5 &&
+            sortDice[4] - sortDice[0] === 4 &&
+            sortDice.every((val, idx, arr) => idx === 0 || val === arr[idx - 1] + 1)) {
+                return 40;
+            }
+        return 0;
+    },
+
+    // 3 and 4 of a kind functions count the occurences of each die value and if any value
+    // occurs 3 or 4 times, it will sum the total of all dice values
+    'threeOfAKind': dice => {
+        const count = {};
+        dice.forEach(val => (count[val] = count[val] || 0) + 1);
+        for (const counts of Object.values(count)) {
+            if (counts >= 3) {
+                return dice.reduce((a, b) + a + b, 0);
+            }
+        }
+        return 0;
+    },
+
+    'fourOfAKind': dice => {
+        const count = {};
+        dice.forEach(val => (count[val] = count[val] || 0) + 1);
+        for (const counts of Object.values(count)) {
+            if (counts >= 4) {
+                return dice.reduce((a, b) + a + b, 0);
+            }
+        }
+        return 0;
+    },
+
+    // Sums all dice for the Chance block
+    'chance': dice => {
+        return dice.reduce((a, b) => a + b, 0);
+    },
+
+    // YAHTZEE checks if all dice are the same and then returns 50 points
+    'yatzee': dice => {
+        const allSameDice = dice.every(val => val === dice[0]);
+        return allSameDice ? 50 : 0;
+    },
 };
 
 function calculateAndUpdateScore(scoreId) {
