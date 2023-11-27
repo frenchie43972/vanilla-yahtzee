@@ -81,7 +81,7 @@ scoreElements.forEach(el => { ... }) - This will iterate over each element (el) 
 el.addEventListener('click', function() { ... }) - The start of the event listener
 
 if (!this.classList.contains('score-set')) { - The statement inside the event listener uses 'this' referring to the
-element clicked. It will check if the element has the class 'score-set', if not the user can set the score.
+element clicked. It will check if the element has the class 'score-set', if not the user can set the score. This prevents double scoring the same value.
 
 const scoreType = this.getAttribute('id').replace('-score', '') - This variable will get the is of a clicked element
 and removes the -score part (i.e., ones-score becomes one) and determines what score category the user selects

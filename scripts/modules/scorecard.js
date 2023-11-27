@@ -1,5 +1,6 @@
 export function scorecard() {
-    
+    scoreListeners();
+    // calculateAndUpdateScore();
 }
 
 document.addEventListener('DOMContentLoaded', scoreListeners);
@@ -100,21 +101,26 @@ function scoreListeners() {
 
     scoreElements.forEach(el => {
         el.addEventListener('click', function() {
+            console.log('Score Element Clicked:', this.id);
             if (!this.classList.contains('score-set')) {
                 const scoreType = this.getAttribute('id').replace('-score', '');
                 calculateAndUpdateScore(scoreType, this);
             }
         });
     });
+    // console.log(scoreElements);
 }
 
 function calculateAndUpdateScore(scoreId) {
     let diceValues = Array.from(document.querySelectorAll('.dice')).map(dice => parseInt(dice.getAttribute('data-value')));
+    console.log('Current dice values:', diceValues);
     let score = 0;
     
     if (scoreCalculators.hasOwnProperty(scoreId)) {
         score = scoreCalculators[scoreId](diceValues);
     }
+    console.log(`Current dice values ${scoreId}:`, score);
 
-    document.querySelector(`#${scoreId} .score-value`).innerText = score;
+    Element.innerText = score;
+    // document.querySelector(`#${scoreId} .score-value`).innerText = score;
 }
