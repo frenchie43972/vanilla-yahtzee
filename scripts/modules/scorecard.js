@@ -61,8 +61,12 @@ const scoreCalculators = {
     // 3 and 4 of a kind functions count the occurences of each die value and if any value
     // occurs 3 or 4 times, it will sum the total of all dice values
     'threeOfAKind': dice => {
+        console.log('function called', dice);
         const count = {};
         dice.forEach(val => (count[val] = count[val] || 0) + 1);
+
+        console.log('Dice Count:', count);
+
         for (const counts of Object.values(count)) {
             if (counts >= 3) {
                 return dice.reduce((a, b) => a + b, 0);
@@ -101,19 +105,16 @@ function scoreListeners() {
 
     scoreElements.forEach(el => {
         el.addEventListener('click', function() {
-            console.log('Score Element Clicked:', this.id);
             if (!this.classList.contains('score-set')) {
                 const scoreType = this.getAttribute('id').replace('-score', '');
                 calculateAndUpdateScore(scoreType, this);
             }
         });
     });
-    // console.log(scoreElements);
 }
 
 function calculateAndUpdateScore(scoreId) {
     let diceValues = Array.from(document.querySelectorAll('.dice')).map(dice => parseInt(dice.getAttribute('data-value')));
-    console.log('Current dice values:', diceValues);
     let score = 0;
     
     if (scoreCalculators.hasOwnProperty(scoreId)) {
